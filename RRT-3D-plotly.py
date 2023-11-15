@@ -18,12 +18,6 @@ class env3d:
 		self.ymax=ymax
 		self.zmin=zmin
 		self.zmax=zmax
-		
-#when obstacles are sensed
-	def obs_add(self,ox,oy,oz):
-		self.x += ox
-		self.y += oy
-		self.z += oz
 				
 #Collision checking for a path
 	def inobstacle(self,x1,y1,x2,y2):
@@ -57,7 +51,8 @@ class env3d:
 			if (x>=xomin) and (x<=xomax) and (y>=yomin) and (y<=yomax):
 				G.remove_node(n)
 				return 0
-				break	
+			else:
+				print(x,y)
 				
 #check if current node is in goal region
 	def ingoal(self):
@@ -341,6 +336,7 @@ class RRT3d:
 			y = [self.y[n1], self.y[n2]]
 			z = [self.z[n1], self.z[n2]]
 			fig.add_trace(go.Scatter3d(x=x, y=y, z=z, mode='lines+markers', line=dict(color='green', width=2), marker=dict(size=5)))
+
 
 			
 #--------------------------------------Global Definitions---------------------------------
