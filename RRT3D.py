@@ -1,13 +1,7 @@
-# %%
 import plotly.graph_objects as go
 import numpy as np
 import math
 import random
-
-# %% [markdown]
-# ## Environment 
-
-# %%
 
 class Environment:
     def __init__(self, obstacles, xmin, xmax, ymin, ymax, zmin, zmax):
@@ -56,11 +50,6 @@ class Environment:
             if(x >= oXmin) and (x <= oXmax) and (y >= oYmin) and (y <= oYmax):
                 return 0
 
-
-# %% [markdown]
-# ## RRT
-
-# %%
 class RRT3d:
     def __init__(self, start):
         (x,y,z) = start
@@ -281,7 +270,8 @@ class RRT3d:
             z = [self.z[n1], self.z[n2]]
             fig.add_trace(go.Scatter3d(x=x, y=y, z=z, mode='lines+markers', line=dict(color='green', width=2), marker=dict(size=5)))
 
-# %%
+# -------------------------------------------- GLOBALS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 startPoint = (100,100,100)
 
 goalX = 5
@@ -324,23 +314,8 @@ environment = Environment(obstacles, 0, 100, 0, 100, 0, 100)
 
 fig = go.Figure()
 
-# %%
-# obst = obstacles
-# print(obst)
-# for i in range(len(obst)):
-#     o1, o2, o3, o4 = obst[i][0], obst[i][1], obst[i][2], obst[i][3]
-#     print(o1,o2,o3,o4)
+# ------------------------------------------------------- PLOTTING ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# print()
-# obs_num = len(vx)//4 #four vertices for each rectangular obstacle
-# for i in range(1,obs_num+1):
-#     xo=vx[4*(i-1)]
-#     xm=vx[4*(i-1)+2]
-#     yo=vy[4*(i-1)]
-#     ym=vy[4*(i-1)+1]  
-#     print(xo,xm,yo,ym)
-
-# %%
 def cubedraw(x, y, zl, zh, color, dash='solid'):
     for i in range(0, len(x) - 1):
         obx = [x[i], x[i + 1], x[i + 1], x[i], x[i]]
@@ -359,7 +334,6 @@ def draw():
         fig.add_trace(go.Scatter3d(x=obx, y=oby, z=obzl, mode='lines', line=dict(color='black')))
         fig.add_trace(go.Scatter3d(x=obx, y=oby, z=obzh, mode='lines', line=dict(color='black')))
         cubedraw(obx, oby, obzl, obzh, 'black')
-
 
     # Draw tree edges
     for i in range(0, len(tree.parent)):
@@ -393,8 +367,9 @@ def draw():
     # Set the layout and display the plot
     fig.update_layout(scene=dict(aspectmode='cube'))
     fig.show()
+    
+# -------------------------------------------------------- MAIN ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# %%
 def main():
     #balance between extending and biasing	
 	for i in range(0,maxIter):
